@@ -2,7 +2,7 @@
 <header>
     <div class="dropdown">
         <button onclick="dropdown()" class="dropbtn">Portal de Ensino</button><br/>
-        <form action="<?=$base;?>/login" id="dropdown" class="dropdown-content">
+        <form action="<?=$base;?>/login" method="POST" id="dropdown" class="dropdown-content">
             <label>
                 <input type="text" name="login" placeholder="Codigo ou CPF" />
             </label><br/>

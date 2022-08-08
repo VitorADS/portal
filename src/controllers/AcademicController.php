@@ -16,7 +16,18 @@ class AcademicController extends Controller {
     }
 
     public function index() {
-        $this->render('academic');
+        $_SESSION['title'] = 'Menu';
+        $this->render('academic/academic');
+    }
+
+    public function users(){
+        $_SESSION['title'] = 'Usuarios';
+        $this->render('academic/users');
+    }
+
+    public function registerUser(){
+        $_SESSION['title'] = 'Registro de Usuario';
+        $this->render('academic/registerUser');        
     }
 
 }

@@ -50,6 +50,21 @@ class UsersController extends Controller {
         }
     }
 
+    public function findByEmail($email){
+        $user = Users::select()
+        ->where('email', $email)
+        ->execute();
+
+        if(count($user) > 0){
+            $user = $this->generateUser($user[0]['id'], $user[0]['name'], $user[0]['email'], $user[0]['password'], $user[0]['cpf'],
+            $user[0]['birthdate'], $user[0]['gender'], $user[0]['token']);
+
+            return $user;
+        }else{
+            return false;
+        }
+    }
+
     public function findByToken($token){
         $user = Users::select()
         ->where('token', $token)
