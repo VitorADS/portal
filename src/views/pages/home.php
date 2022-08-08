@@ -2,13 +2,13 @@
 <header>
     <div class="dropdown">
         <button onclick="dropdown()" class="dropbtn">Portal de Ensino</button><br/>
-        <form action="" id="dropdown" class="dropdown-content">
+        <form action="<?=$base;?>/login" id="dropdown" class="dropdown-content">
             <label>
                 <input type="text" name="login" placeholder="Codigo ou CPF" />
-            </label><br/><br/>
+            </label><br/>
             <label>
                 <input type="password" name="password" placeholder="Senha" />
-            </label><br/><br/>
+            </label><br/>
             <input type="submit" value="Entrar" />
         </form>
     </div>

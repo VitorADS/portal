@@ -5,6 +5,19 @@ use \core\Controller;
 
 class AuthController extends Controller {
 
+    public static function checkLogin(){
+        if(!empty($_SESSION['token'])){
+            $users = new UsersController();
+            $loggedUser = $users->findByToken($_SESSION['token']);
+
+            if($loggedUser){
+                return $loggedUser;
+            }
+        }
+
+        return false;
+    }
+
     public function login(){
         $login = filter_input('login', INPUT_POST);
         $password = filter_input(('password'), INPUT_POST);
@@ -34,6 +47,13 @@ class AuthController extends Controller {
         }else{
             $_SESSION['flash'] = 'Codigo e ou senha nao preenchidos!';
         }
+    }
+
+    public function logout(){
+        $_SESSION['token'] = '';
+        session_unset();
+        session_destroy();
+        $this->redirect('/');
     }
 
 }
