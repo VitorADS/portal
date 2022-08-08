@@ -1,0 +1,21 @@
+.dropbtn{
+    cursor: pointer;
+}
+
+.dropbtn:hover{
+    
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+}
+
+.show{
+    display: block;
+}
