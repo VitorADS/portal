@@ -16,6 +16,19 @@
     position: absolute;
 }
 
+.table{
+    position: relative;
+    display: inline-block;
+}
+
+.users-table{
+    position: absolute;
+}
+
+.hide{
+    display: none;
+}
+
 .show{
     display: block;
 }

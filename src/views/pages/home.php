@@ -12,5 +12,6 @@
             <input type="submit" value="Entrar" />
         </form>
     </div>
+    <?=$_SESSION['flash'];?>
 </header>
 <?php $render('footer'); ?>

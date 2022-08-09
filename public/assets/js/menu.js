@@ -6,3 +6,12 @@ function dropdown(){
         menu.classList.add('show');
     }
 }
+
+function showUsers(){
+    const table = document.getElementById("table");
+    if(table.classList.contains('hide')){
+        table.classList.remove('hide');
+    }else{
+        table.classList.add('hide');
+    }
+}

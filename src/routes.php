@@ -14,3 +14,4 @@ $router->post('/academico/registrarUsuarioAction', 'AuthController@registerActio
 $router->get('/academico/menu', 'AcademicController@index');
 $router->get('/academico/usuarios', 'AcademicController@users');
 $router->get('/academico/registrarUsuario', 'AcademicController@registerUser');
+$router->get('/academico/acessoUsuario', 'AcademicController@acessoUsuario');

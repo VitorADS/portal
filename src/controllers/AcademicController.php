@@ -20,9 +20,33 @@ class AcademicController extends Controller {
         $this->render('academic/academic');
     }
 
+    public function acessoUsuario(){
+        $_SESSION['title'] = 'Acesso Usuario';
+
+        $this->render('academic/acessoUsuario');
+    }
+
     public function users(){
         $_SESSION['title'] = 'Usuarios';
-        $this->render('academic/users');
+
+        $user = new UsersController();
+        $users = $user->getAll();
+        $array = [];
+
+        foreach($users as $data){
+            $data = $user->generateUser($data['id'], $data['name'], $data['email'], $data['password'],
+            $data['cpf'], date('d/m/Y', strtotime($data['birthdate'])), $data['gender'], $data['token'], $data['student'],
+            $data['employee'], $data['teacher']);
+
+            $array[] = $data;
+        }
+
+        $data = [
+            'users' => $array,
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/users', $data);
     }
 
     public function registerUser(){
