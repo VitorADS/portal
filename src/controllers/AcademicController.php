@@ -17,13 +17,22 @@ class AcademicController extends Controller {
 
     public function index() {
         $_SESSION['title'] = 'Menu';
-        $this->render('academic/academic');
+
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/academic', $data);
     }
 
     public function acessoUsuario(){
         $_SESSION['title'] = 'Acesso Usuario';
 
-        $this->render('academic/acessoUsuario');
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/acessoUsuario', $data);
     }
 
     public function users(){
@@ -31,18 +40,9 @@ class AcademicController extends Controller {
 
         $user = new UsersController();
         $users = $user->getAll();
-        $array = [];
-
-        foreach($users as $data){
-            $data = $user->generateUser($data['id'], $data['name'], $data['email'], $data['password'],
-            $data['cpf'], date('d/m/Y', strtotime($data['birthdate'])), $data['gender'], $data['token'], $data['student'],
-            $data['employee'], $data['teacher']);
-
-            $array[] = $data;
-        }
 
         $data = [
-            'users' => $array,
+            'users' => $users,
             'loggedUser' => $this->loggedUser
         ];
 
@@ -51,7 +51,12 @@ class AcademicController extends Controller {
 
     public function registerUser(){
         $_SESSION['title'] = 'Registro de Usuario';
-        $this->render('academic/registerUser');        
+
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/registerUser', $data);        
     }
 
 }

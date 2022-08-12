@@ -1,4 +1,4 @@
-<?php $render('header'); ?>
+<?php $render('headerHome'); ?>
 <header>
     <div class="dropdown">
         <button onclick="dropdown()" class="dropbtn">Portal de Ensino</button><br/>

@@ -19,6 +19,10 @@ class UsersController extends Controller {
         $user->student = $student;
         $user->employee = $employee;
         $user->teacher = $teacher;
+        $user->gender == 1 ? $user->gender = 'Masculino' : $user->gender = 'Feminino';
+        $user->student == 1 ? $user->student = 'Sim' : $user->student = 'Nao';
+        $user->teacher == 1 ? $user->teacher = 'Sim' : $user->teacher = 'Nao';
+        $user->employee == 1 ? $user->employee = 'Sim' : $user->employee = 'Nao';
 
         return $user;
     }
@@ -89,10 +93,18 @@ class UsersController extends Controller {
     }
 
     public function getAll(){
-        $user = Users::select()
-            ->get();
+        $users = Users::select()->get();
 
-        return $user;
+        $array = [];
+
+        foreach($users as $user){
+            $data = $this->generateUser($user['id'], $user['name'], $user['email'], $user['password'], $user['cpf'],
+            $user['birthdate'], $user['gender'], $user['token'], $user['student'], $user['employee'], $user['teacher']);
+
+            $array[] = $data;
+        }
+
+        return $array;
     }
 
     public function updateUser(Users $user){

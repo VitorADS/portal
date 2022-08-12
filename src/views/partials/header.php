@@ -8,3 +8,27 @@
     <title><?=$_SESSION['title'];?></title>
 </head>
 <body>
+<header>
+    <div>
+
+    </div>
+</header>
+<nav class="menu">
+    <ul>
+        <li><a href="#">Cadastro</a>
+            <ul>
+                <li><a href="#">Seguranca</a>
+                    <ul class="sub-menu">
+                        <li>Acesso usuario</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Sistemas</a>
+            <ul>
+                <li>Portal</li>
+                <li>Reserva de Recursos</li>
+            </ul>
+        </li>
+    </ul>
+</nav>

@@ -1,4 +1,4 @@
 composer.phar
 /vendor/
 .DS_Store
-src/Config.php
+.src/Config.php
