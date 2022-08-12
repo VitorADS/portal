@@ -24,14 +24,16 @@ class AuthController extends Controller {
         $email = filter_input(INPUT_POST, 'email');
         $cpf = filter_input(INPUT_POST, 'cpf');
         $birthdate = filter_input(INPUT_POST, 'birthdate');
-        $gender = filter_input(INPUT_POST, 'gender');
         $birthdate = date("Y-m-d", strtotime($birthdate));
+        $gender = filter_input(INPUT_POST, 'gender');
         $teacher = filter_input(INPUT_POST, 'teacher');
         $student = filter_input(INPUT_POST, 'student');
         $employee = filter_input(INPUT_POST, 'employee');
 
+        //echo $gender;exit;
+
         $users = new UsersController();
-        if($name and $email and $cpf and $birthdate and $teacher and $student and $employee){
+        if($name and $email and $cpf and $birthdate){
             if($users->findByCpf($cpf) or $users->findByEmail($email)){
                 $_SESSION['flash'] = 'E-mail e ou CPF ja cadastrados!';
                 $this->redirect('/academico/registrarUsuario');

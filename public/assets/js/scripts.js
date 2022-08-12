@@ -35,6 +35,7 @@ function showUser(user){
     if(!user){
         document.querySelector("#flash").innerHTML = 'Usuario nao encontrado!';
     }else{
+        document.querySelector("#flash").innerHTML = null;
         document.querySelector("#name").innerHTML = "Nome: "+user.name;
         document.querySelector("#cpf").innerHTML = "CPF: "+user.cpf;
         document.querySelector("#birthdate").innerHTML = "Data de nascimento: "+user.birthdate;
