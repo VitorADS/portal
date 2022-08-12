@@ -30,8 +30,6 @@ class AuthController extends Controller {
         $student = filter_input(INPUT_POST, 'student');
         $employee = filter_input(INPUT_POST, 'employee');
 
-        //echo $gender;exit;
-
         $users = new UsersController();
         if($name and $email and $cpf and $birthdate){
             if($users->findByCpf($cpf) or $users->findByEmail($email)){

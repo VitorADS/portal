@@ -62,7 +62,6 @@ async function updateUser(){
         password1: password1.value,
         password2: password2.value
     };
-    console.log(body);
 
     let request = await fetch('http://localhost/portal/public/academico/updateUser', {
         method: 'POST',
