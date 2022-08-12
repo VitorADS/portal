@@ -56,21 +56,22 @@ async function updateUser(){
     const password1 = document.getElementById("password1");
     const password2 = document.getElementById("password2");
 
-    let body = [
-        id.value,
-        password1.value,
-        password2.value
-    ];
+    let body = {
+        id: id.value,
+        password1: password1.value,
+        password2: password2.value
+    };
     console.log(body);
 
-    let request = await fetch('http://localhost/portal/public/academico/updateUser/'+id.value, {
+    let request = await fetch('http://localhost/portal/public/academico/updateUser', {
         method: 'POST',
         body: JSON.stringify({
-            title: 'body',
             body: body
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     })
+
+    document.querySelector("#flash").innerHTML = await request.json();
 }

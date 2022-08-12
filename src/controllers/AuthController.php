@@ -2,7 +2,6 @@
 namespace src\controllers;
 
 use \core\Controller;
-use DateTime;
 use src\models\Users;
 
 class AuthController extends Controller {
@@ -85,28 +84,24 @@ class AuthController extends Controller {
         $this->redirect('/');
     }
 
-    public function updateUser($creds){
-        $teste = filter_input(INPUT_POST, 'body');
-        print_r($teste);exit;
-        $creds = json_decode($creds);
-        print_r($creds);exit;
-        $password = $creds['password'];
-        $password2 = filter_input(INPUT_POST, 'password2');
+    public function updateUser(){
+        $creds = json_decode(file_get_contents('php://input'), true);
+        $password1 = $creds['body']['password1'];
+        $password2 = $creds['body']['password2'];
 
-        if($password and $password2){
-            if($password == $password2){
+        if($password1 and $password2){
+            if($password1 == $password2){
                 $users = new UsersController();
-                $user = $users->findById(3);
-                $user->password = password_hash($password, PASSWORD_DEFAULT);
+                $user = $users->findById($creds['body']['id']);
+                $user->password = password_hash($password1, PASSWORD_DEFAULT);
                 $users->updateUser($user);
-                $_SESSION['flash'] = 'Senha alterada com sucesso!';
+                echo json_encode('Senha alterada com sucesso!');
             }else{
-                $_SESSION['flash'] = 'Senhas nao conferem!';
+                echo json_encode('Senhas nao conferem!');
             }
         }else{
-            $_SESSION['flash'] = 'Preencha os dois campos!';
+            echo json_encode('Preencha os dois campos!');
         }
-        $this->redirect('/academico/acessoUsuario');
     }
 
     public function logout(){

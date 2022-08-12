@@ -9,7 +9,7 @@
 </label>
 <button onclick="searchUser()">Pesquisar</button>
 <div id="flash">
-
+    
 </div><hr/>
 
 <label id="name">
