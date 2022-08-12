@@ -2,7 +2,7 @@
 <button><a href="<?=$base;?>/academico/menu">Voltar</a></button>
 <button><a href="<?=$base;?>/academico/registrarUsuario">Registrar Usuario</a></button>
 <button onclick="showUsers()">Ver Usuarios</button>
-<button><a href="<?=$base;?>/academico/acessoUsuario"></a>Acesso Usuario</button>
+<button><a href="<?=$base;?>/academico/acessoUsuario">Acesso Usuario</a></button>
 <div class="table">
     <table id="table" class="users-table hide">
         <thead>

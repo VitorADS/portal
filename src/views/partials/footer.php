@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?=$base;?>/assets/js/menu.js"></script>
+<script type="text/javascript" src="<?=$base;?>/assets/js/scripts.js"></script>
 </body>
 </html>
 <?php 

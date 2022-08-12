@@ -13,7 +13,7 @@ class UsersController extends Controller {
         $user->email = $email;
         $user->password = $password;
         $user->cpf = $cpf;
-        $user->birthdate = $birthdate;
+        $user->birthdate = date('d/m/Y', strtotime($birthdate));
         $user->gender = $gender;
         $user->token = $token;
         $user->student = $student;
@@ -21,6 +21,11 @@ class UsersController extends Controller {
         $user->teacher = $teacher;
 
         return $user;
+    }
+
+    public function requestUser($id){
+        $user = $this->findById($id);
+        echo json_encode($user);
     }
 
     public function findById($id){
@@ -97,6 +102,9 @@ class UsersController extends Controller {
             ->set('password', $user->password)
             ->set('gender', $user->gender)
             ->set('token', $user->token)
+            ->set('teacher', $user->teacher)
+            ->set('student', $user->student)
+            ->set('employee', $user->employee)
             ->where('id', $user->id)
             ->execute();
     }

@@ -85,6 +85,30 @@ class AuthController extends Controller {
         $this->redirect('/');
     }
 
+    public function updateUser($creds){
+        $teste = filter_input(INPUT_POST, 'body');
+        print_r($teste);exit;
+        $creds = json_decode($creds);
+        print_r($creds);exit;
+        $password = $creds['password'];
+        $password2 = filter_input(INPUT_POST, 'password2');
+
+        if($password and $password2){
+            if($password == $password2){
+                $users = new UsersController();
+                $user = $users->findById(3);
+                $user->password = password_hash($password, PASSWORD_DEFAULT);
+                $users->updateUser($user);
+                $_SESSION['flash'] = 'Senha alterada com sucesso!';
+            }else{
+                $_SESSION['flash'] = 'Senhas nao conferem!';
+            }
+        }else{
+            $_SESSION['flash'] = 'Preencha os dois campos!';
+        }
+        $this->redirect('/academico/acessoUsuario');
+    }
+
     public function logout(){
         $_SESSION['token'] = null;
         session_unset();
