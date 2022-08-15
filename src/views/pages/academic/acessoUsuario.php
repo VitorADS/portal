@@ -1,5 +1,4 @@
 <?php $render('header'); ?>
-<button><a href="<?=$base;?>/academico/usuarios">Voltar</a></button>
 
 <h1>Acesso Usuario</h1><hr/>
 

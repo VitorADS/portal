@@ -59,4 +59,14 @@ class AcademicController extends Controller {
         $this->render('academic/registerUser', $data);        
     }
 
+    public function home(){
+        $_SESSION['title'] = 'Portal de Ensino';
+
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/portal/home', $data);
+    }
+
 }

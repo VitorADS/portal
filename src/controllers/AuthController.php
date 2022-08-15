@@ -44,6 +44,7 @@ class AuthController extends Controller {
                     'password' => password_hash($password, PASSWORD_DEFAULT),
                     'birthdate' => $birthdate,
                     'gender' => $gender,
+                    'token' => md5(rand(0, 99999).time()),
                     'teacher' => $teacher,
                     'student' => $student,
                     'employee' => $employee

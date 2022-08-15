@@ -63,15 +63,19 @@ async function updateUser(){
         password2: password2.value
     };
 
-    let request = await fetch('http://localhost/portal/public/academico/updateUser', {
-        method: 'POST',
-        body: JSON.stringify({
-            body: body
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-
-    document.querySelector("#flash").innerHTML = await request.json();
+    try{
+        let request = await fetch('http://localhost/portal/public/academico/updateUser', {
+            method: 'POST',
+            body: JSON.stringify({
+                body: body
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        document.querySelector("#flash").innerHTML = await request.json();
+    }catch(e){
+        document.querySelector("#flash").innerHTML = "Erro: " + e;
+    }
+    
 }

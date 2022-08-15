@@ -21,15 +21,6 @@
     position: absolute;
 }
 
-.table{
-    position: relative;
-    display: inline-block;
-}
-
-.users-table{
-    position: absolute;
-}
-
 .hide{
     display: none;
 }
@@ -47,6 +38,7 @@
 }
 
 .menu li{
+    list-style: none;
     position: relative;
     float: left;
     border-right: 1px solid #c0c0c0;
@@ -71,18 +63,26 @@
     display: block;
 }
 
-.menu li ul li{
+.menu li ul li {
     border:1px solid #c0c0c0;
     display:block;
     width:150px;
 }
 
-.sub-menu{
-    list-style: none;
-    border: none;
+.headerHome{
+    width: 100%;
 }
 
-.sub-menu li{
-    margin-left: 150px;
-    padding: 5px;
+.homeEsquerda{
+    float: left;
+}
+
+.homeCentro{
+    padding-top: 100px;
+    margin-left: 600px;
+    margin-bottom: 100px;
+}
+
+.homeDireita{
+    float: right;
 }

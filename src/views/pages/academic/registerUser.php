@@ -1,6 +1,4 @@
 <?php $render('header'); ?>
-<button><a href="<?=$base;?>/academico/usuarios">Voltar</a></button><br/>
-<?=$_SESSION['flash']?>
 <form action="<?=$base;?>/academico/registrarUsuarioAction" method="POST">
     <label>
         Nome:

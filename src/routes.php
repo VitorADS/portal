@@ -18,5 +18,8 @@ $router->get('/academico/registrarUsuario', 'AcademicController@registerUser');
 $router->get('/academico/acessoUsuario', 'AcademicController@acessoUsuario');
 $router->post('/academico/updateUser', 'AuthController@updateUser');
 
+//Portal
+$router->get('/academico/portal/home', 'AcademicController@home');
+
 //Requests
 $router->get('/academico/user/{id}', 'UsersController@requestUser');

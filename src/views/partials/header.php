@@ -17,18 +17,16 @@
     <ul>
         <li><a href="#">Cadastro</a>
             <ul>
-                <li><a href="#">Seguranca</a>
-                    <ul class="sub-menu">
-                        <li>Acesso usuario</li>
-                    </ul>
-                </li>
+                <li><a href="<?=$base;?>/academico/acessoUsuario">Acesso Usuario</a></li>
+                <li><a href="<?=$base;?>/academico/usuarios">Usuarios</a></li>
             </ul>
         </li>
         <li><a href="#">Sistemas</a>
             <ul>
-                <li>Portal</li>
-                <li>Reserva de Recursos</li>
+                <li><a href="<?=$base;?>/academico/portal/home">Portal</a></li>
+                <li><a href="">Reserva de Recursos</a></li>
             </ul>
         </li>
+        <li><a href="<?=$base;?>/academico/logout">Sair</a></li>
     </ul>
 </nav>
