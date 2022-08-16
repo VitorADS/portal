@@ -24,7 +24,7 @@
 <label>
     Senha: <br/>
     <input type="password" name="password1" id="password1" disabled /> <br/>
-</label>
+</label><br/>
 <label>
     Confirmar senha: <br/>
     <input type="password" name="password2" id="password2" disabled /> <br/>
