@@ -1,6 +1,5 @@
 <?php
 use core\Router;
-use src\controllers\AuthController;
 
 $router = new Router();
 

@@ -1,7 +1,8 @@
 {
     "require": {
         "clancats/hydrahon": "^1.1",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+        "twbs/bootstrap": "5.2.0"
     },
     "autoload": {
         "psr-4": {

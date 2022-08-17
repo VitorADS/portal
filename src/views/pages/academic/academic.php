@@ -1,3 +1,3 @@
-<?php $render('header'); ?>
+<?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 
 <?php $render('footer'); ?>

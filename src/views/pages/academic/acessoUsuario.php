@@ -1,4 +1,4 @@
-<?php $render('header'); ?>
+<?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 
 <h1>Acesso Usuario</h1><hr/>
 

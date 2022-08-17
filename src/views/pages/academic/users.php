@@ -1,4 +1,4 @@
-<?php $render('header'); ?>
+<?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 <div class="table">
     <table id="table">
         <thead>

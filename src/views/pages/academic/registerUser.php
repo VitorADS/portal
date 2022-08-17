@@ -1,4 +1,4 @@
-<?php $render('header'); ?>
+<?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 <form action="<?=$base;?>/academico/registrarUsuarioAction" method="POST">
     <label>
         Nome:

@@ -79,3 +79,18 @@ async function updateUser(){
     }
     
 }
+
+function showUserContent(){
+    const div = document.querySelector(".menuUser");
+    const div2 = document.querySelector(".menuUserContent");
+
+    if(div2.classList.contains('hide')){
+        div2.classList.remove('hide');
+        div2.classList.add('show');
+        div.style.backgroundColor = '#c0c0c0';
+    }else{
+        div.style.backgroundColor = '';
+        div2.classList.add('hide');
+        div2.classList.remove('show');
+    }
+}
