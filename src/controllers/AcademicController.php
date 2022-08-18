@@ -79,4 +79,14 @@ class AcademicController extends Controller {
         $this->render('academic/personalData', $data);
     }
 
+    public function colaborador(){
+        $_SESSION['title'] = 'Extrato de Vencimentos';
+
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/portal/folhaPagamento', $data);
+    }
+
 }

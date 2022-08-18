@@ -5,7 +5,7 @@
         <a class="nav-link" href="<?=$base;?>/academico/portal/home">Home</a>
       </li>
      <li class="nav-item">
-        <a class="nav-link" href="#">Colaborador</a>
+        <a class="nav-link" href="<?=$base;?>/academico/portal/folhaPagamento">Colaborador</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Espaco Academico</a>

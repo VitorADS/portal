@@ -20,6 +20,7 @@ $router->get('academico/dadosPessoais', 'AcademicController@personalData');
 
 //Portal
 $router->get('/academico/portal/home', 'AcademicController@home');
+$router->get('/academico/portal/folhaPagamento', 'AcademicController@colaborador');
 
 //Requests
 $router->get('/academico/user/{id}', 'UsersController@requestUser');
