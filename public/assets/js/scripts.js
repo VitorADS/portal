@@ -83,12 +83,15 @@ async function updateUser(){
 function showUserContent(){
     const div = document.querySelector(".menuUser");
     const div2 = document.querySelector(".menuUserContent");
+    const name = document.querySelector(".nameHeader");
 
     if(div2.classList.contains('hide')){
         div2.classList.remove('hide');
         div2.classList.add('show');
+        name.style.color = "black";
         div.style.backgroundColor = '#c0c0c0';
     }else{
+        name.style.color = "";
         div.style.backgroundColor = '';
         div2.classList.add('hide');
         div2.classList.remove('show');

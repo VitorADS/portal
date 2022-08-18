@@ -12,11 +12,11 @@
 <body>
 <header class="p-5 bg-primary text-white">
     <div class="headerEsquerda">
-      <h1>Portal de ensino</h1>  
+      <h1>Portal de Ensino</h1>  
     </div>
     <div class="headerDireita">
       <div onclick="showUserContent()" class="dropdown-toggle text-white menuUser">
-        Olá, <?=$loggedUser->name;?>
+        <tag class="nameHeader">Olá, <?=$loggedUser->name;?></tag>
         <div class="menuUserContent hide">
           <ul>
             <li><a href="">Meus Dados</a></li>
