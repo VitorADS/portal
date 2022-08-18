@@ -112,19 +112,36 @@ header{
 .menuUser{
     text-align: center;
     cursor: pointer;
-    width: 200px;
+    width: 190px;
+    height: 50px;
     border-radius: 5px;
+    float: right;
 }
 
 .menuUserContent{
+    background-color: #c0c0c0;
     float: left;
     text-align: left;
-    margin-top: 5px;
-    width: 200px;
-    background-color: #c0c0c0;
+    height: 59px;
     border-radius: 5px;
+    width: 190px;
+    padding-top: 4px;
 }
 
-.menuUserContent ul{
+.menuUserContent ul li{
     list-style: none;
+    border-style: none;
+}
+
+.menuUserContent a{
+    text-decoration: none;
+    color: black;
+}
+
+.menuAcad{
+    font-size: 22px;    
+}
+
+.menuAcad ul li{
+    padding-left: 30px;
 }

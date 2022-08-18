@@ -1,3 +1,3 @@
 <?php $render('header', ['loggedUser' => $loggedUser]); $render('menuAcademico');?>
-<h1 align="center">Olá, <?=$loggedUser->name;?></h1>
+<h3 align="center">Olá, <?=$loggedUser->name;?></h3>
 <?php $render('footer'); ?>

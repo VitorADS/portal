@@ -20,9 +20,6 @@
             <li><a class="dropdown-item" href="#">Reserva de Recursos</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?=$base;?>/academico/logout">Sair</a>
-        </li>
       </ul>
     </div>
   </div>
