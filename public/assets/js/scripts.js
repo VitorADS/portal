@@ -97,3 +97,22 @@ function showUserContent(){
         div2.classList.remove('show');
     }
 }
+
+// function userSearch(){
+//     const id = document.getElementById("id");
+
+//     fetch('http://localhost/portal/public/academico/user/'+id.value)
+//         .then(function(resultado){
+//             return resultado.json();
+//         })
+//         .then(function(json){
+//             userShow(json);
+//         })
+//         .catch(error){
+//             console.log("Deu ruim: "+e);
+//         }
+// }
+
+// function userShow(user){
+    
+// }

@@ -6,8 +6,9 @@
                 <span class="input-group-text" id="basic-addon1">Codigo</span>
             </div>
             <input type="text" name="id" class="form-control" aria-label="codigo" aria-describedby="basic-addon1" />
+            <button class="btn btn-primary" id="user"><i class="fa fa-search"></i></button>
         </div>
-        <input type="submit" value="Registrar Ponto" id="submit" class="btn btn-primary" /><hr/>
+        <input type="submit" value="Registrar Ponto" id="submit" class="btn btn-primary"/><hr/>
         <?php if($_SESSION['flash'] == 0): ?>
             <div class="alert alert-warning" role="alert">
                 <p>Usuario nao encontrado!</p>
