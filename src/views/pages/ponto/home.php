@@ -9,7 +9,7 @@
         </div>
         <input type="submit" value="Registrar Ponto" id="submit" class="btn btn-primary" /><hr/>
         <?php if($_SESSION['flash'] == 0): ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-warning" role="alert">
                 <p>Usuario nao encontrado!</p>
             </div>
         <?php endif; ?>

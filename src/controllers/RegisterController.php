@@ -6,9 +6,11 @@ use DateTime;
 use src\models\Registers;
 
 class RegisterController extends Controller {
+    private $date;
 
     public function __construct(){
         date_default_timezone_set('America/Sao_Paulo');
+        $this->date = date('Y-m-d H:i:s');
     }
 
     public function index() {
@@ -20,7 +22,7 @@ class RegisterController extends Controller {
     public function addRegister($idUser, $datetime){
         Registers::insert([
             'idUser' => $idUser,
-            'date' =>$datetime
+            'date' => $datetime
         ])->execute();
     }
 
@@ -29,11 +31,10 @@ class RegisterController extends Controller {
 
         $user = new UsersController();
         if($user = $user->findById($id)){
-            $date = date('Y-m-d H:i:s');
-            $this->addRegister($user->id, $date);
+            $this->addRegister($user->id, $this->date);
 
-            $date = date('d/m/Y H:i:s', strtotime($date));
-            $_SESSION['flash'] = 'Ultimo usuario registrado: '.$user->id. ' Data: '.$date ;
+            $this->date = date('d/m/Y H:i:s', strtotime($this->date));
+            $_SESSION['flash'] = 'Ultimo usuario registrado: '.$user->id. ' Data: '.$this->date ;
             
         }else{
             $_SESSION['flash'] = 0;
