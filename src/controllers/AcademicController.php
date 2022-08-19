@@ -89,4 +89,14 @@ class AcademicController extends Controller {
         $this->render('academic/portal/folhaPagamento', $data);
     }
 
+    public function espelhoPonto(){
+        $_SESSION['title'] = 'Espelho de Ponto';
+
+        $data = [
+            'loggedUser' => $this->loggedUser
+        ];
+
+        $this->render('academic/portal/espelhoPonto', $data);
+    }
+
 }
