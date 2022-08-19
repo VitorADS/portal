@@ -28,3 +28,4 @@ $router->get('/academico/user/{id}', 'UsersController@requestUser');
 
 //Ponto
 $router->get('/ponto', 'RegisterController@index');
+$router->post('/ponto/registrarPonto', 'RegisterController@registraPonto');
