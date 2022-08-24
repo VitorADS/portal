@@ -8,7 +8,7 @@ class Config {
     const DB_HOST = 'localhost';
     const DB_DATABASE = 'portal';
     CONST DB_USER = 'root';
-    const DB_PASS = 'Vitucho852';
+    const DB_PASS = '';
 
     const ERROR_CONTROLLER = 'ErrorController';
     const DEFAULT_ACTION = 'index';

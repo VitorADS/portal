@@ -26,6 +26,7 @@ class RegisterController extends Controller {
         $registerMonth = new RegistersMonths();
         $registerMonth->id = $id;
         $registerMonth->idUser = $idUser;
+        $registerMonth->month = $month;
         $registerMonth->date = $date;
         $registerMonth->done = $done;
 
