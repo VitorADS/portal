@@ -27,6 +27,15 @@ class UsersController extends Controller {
         return $user;
     }
 
+    public function generateUserUpdate(Users $user) {
+        $user->gender == 'Masculino' ? $user->gender = 1 : $user->gender = 0;
+        $user->student == 'Sim' ? $user->student = 1 : $user->student = 0;
+        $user->teacher == 'Sim' ? $user->teacher = 1 : $user->teacher = 0;
+        $user->employee == 'Sim' ? $user->employee = 1 : $user->employee = 0;
+
+        return $user;
+    }
+
     public function requestUser($id){
         $user = $this->findById($id);
         echo json_encode($user);
@@ -80,7 +89,7 @@ class UsersController extends Controller {
     public function findByToken($token){
         $user = Users::select()
             ->where('token', $token)
-            ->get();
+            ->execute();
 
         if(count($user) > 0){
             $user = $this->generateUser($user[0]['id'], $user[0]['name'], $user[0]['email'], $user[0]['password'], $user[0]['cpf'],
@@ -108,6 +117,8 @@ class UsersController extends Controller {
     }
 
     public function updateUser(Users $user){
+        $user = $this->generateUserUpdate($user);
+
         Users::update()
             ->set('name', $user->name)
             ->set('email', $user->email)

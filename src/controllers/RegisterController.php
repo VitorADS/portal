@@ -2,7 +2,6 @@
 namespace src\controllers;
 
 use \core\Controller;
-use DateTime;
 use src\models\Registers;
 use src\models\RegistersMonths;
 
@@ -14,10 +13,13 @@ class RegisterController extends Controller {
         date_default_timezone_set('America/Sao_Paulo');
         $this->date = date('Y-m-d H:i:s');
 
-        $this->loggedUser = AuthController::checkLogin();
+        if(!empty($_SESSION['token'])){
+            $this->loggedUser = AuthController::checkLogin();
+        }
+    }
 
+    public function notLogged(){
         if(!$this->loggedUser){
-            $_SESSION['token'] = null;
             $this->redirect('/');
         }
     }
@@ -34,6 +36,7 @@ class RegisterController extends Controller {
     }
 
     public function findRegisterMonth($idUser, $month){
+        $this->notLogged();
         $register = RegistersMonths::select()
             ->where('idUser', $idUser)
             ->where('month', $month)
@@ -56,6 +59,7 @@ class RegisterController extends Controller {
     }
 
     public function addRegister($idUser){
+        $this->notLogged();
         $date = date('m', strtotime($this->date));
         $registerMonth = $this->findRegisterMonth($idUser, $date);
 
@@ -92,13 +96,42 @@ class RegisterController extends Controller {
     }
 
     public function checkRegister(){
+        $this->notLogged();
         $_SESSION['title'] = 'Verificar Ponto';
+        $date = date('m', strtotime($this->date));
+
+        $registers = RegistersMonths::select()
+            ->where('month', $date)
+            ->where('done', 0)
+            ->get();
+
+        if($registers){
+            $arrayRegisters = [];
+            foreach($registers as $register){
+                $register = $this->generateRegisterMonth($register['id'], $register['idUser'], $register['month'],
+                    $register['date'], $register['done']);
+
+                $arrayRegisters[] = $register;
+            }
+
+        }
+
+        $arrayUsers = [];
+        $users = new UsersController();
+        foreach($arrayRegisters as $user){
+            $user = $users->findById($user->idUser);
+            $arrayUsers[] = $user;
+        }
 
         $data = [
-            'loggedUser' => $this->loggedUser
+            'loggedUser' => $this->loggedUser,
+            'users' => $arrayUsers
         ];
 
         $this->render('ponto/verificaPonto', $data);
     }
 
+    public function registerDetail(){
+
+    }
 }

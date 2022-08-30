@@ -1,4 +1,4 @@
-<div class="sideBar text-muted">
+<div class="sideBar text-muted menuColaborador">
     <h4>Colaborador</h4>    
     <ul>
         <li><a href="<?=$base;?>/academico/portal/espelhoPonto">Espelho do Ponto</a></li>

@@ -18,6 +18,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="<?=$base;?>/academico/portal/home">Portal</a></li>
             <li><a class="dropdown-item" href="#">Reserva de Recursos</a></li>
+            <li><a class="dropdown-item" href="<?=$base;?>/academico/verificarPonto">Gerenciar Ponto</a></li>
           </ul>
         </li>
       </ul>

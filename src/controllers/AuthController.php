@@ -77,6 +77,7 @@ class AuthController extends Controller {
                     $_SESSION['token'] = md5(rand(0, 999999).time());
                     $user->token = $_SESSION['token'];
                     $users->updateUser($user);
+                    //echo $_SESSION['token']; echo '<br><br><hr>'; print_r($this->loggedUser); echo '<br><br><hr>'; print_r($user);exit;
                     $this->redirect('/academico/menu');
                 }
             }
