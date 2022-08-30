@@ -95,6 +95,21 @@ class RegisterController extends Controller {
         return $array;
     }
 
+    public function findRegisterById($id){
+        $register = Registers::select()
+            ->where('id', $id)
+            ->get();
+
+        if($register){
+            $register = $this->generateRegister($register[0]['id'], $register[0]['idUser'], $register[0]['month'], $register[0]['date']);
+            $register->date = date('d/m/Y H:i:s', strtotime($register->date));
+
+            return $register;
+        }
+
+        return false;
+    }
+
     public function index() {
         $_SESSION['title'] = 'Captura de Ponto';
         
@@ -195,5 +210,22 @@ class RegisterController extends Controller {
         ];
 
         $this->render('ponto/registerDetail', $data);
+    }
+
+    public function editarPonto($id){
+        $this->notLogged();
+        $register = $this->findRegisterById($id);
+        $user = new UsersController();
+        $user = $user->findById($register->idUser);
+
+        $_SESSION['title'] = 'Editando Ponto - '.$user->name;
+
+        $data = [
+            'loggedUser' => $this->loggedUser,
+            'user' => $user,
+            'register' => $register
+        ];
+
+        $this->render('ponto/editarPonto', $data);
     }
 }
