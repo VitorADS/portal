@@ -220,21 +220,26 @@ header{
 .pontoTable{
     margin-left: 250px;
     width: 1000px;
-}
-
-.pontoTable a{
-    text-decoration: none;
-    color: inherit;
+    text-align: center;
 }
 
 .pontoTable button{
-    width: 70px;
+    width: 80px;
 }
 
-.pontoTable a:hover{
+.modalPonto a:hover{
     color: white;
 }
 
 .pontoTable table tr:hover{
     background-color: #c0c0c0;
+}
+
+.modalPonto{
+    text-align: center;
+}
+
+.modalPonto a{
+    text-decoration: none;
+    color: inherit;
 }
