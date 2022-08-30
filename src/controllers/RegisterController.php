@@ -35,8 +35,32 @@ class RegisterController extends Controller {
         return $registerMonth;
     }
 
+    public function generateRegister($id, $idUser, $month, $date){
+        $register = new Registers();
+        $register->id = $id;
+        $register->idUser = $idUser;
+        $register->month = $month;
+        $register->date = $date;
+
+        return $register;
+    }
+
+    public function findRegisterMonthById($id){
+        $register = RegistersMonths::select()
+            ->where('id', $id)
+            ->get();
+        
+        if($register){
+            $register = $this->generateRegisterMonth($register[0]['id'], $register[0]['idUser'], $register[0]['month'],
+            $register[0]['date'], $register[0]['done']);
+
+            return $register;
+        }
+
+        return false;
+    }
+
     public function findRegisterMonth($idUser, $month){
-        $this->notLogged();
         $register = RegistersMonths::select()
             ->where('idUser', $idUser)
             ->where('month', $month)
@@ -52,6 +76,25 @@ class RegisterController extends Controller {
         return false;
     }
 
+    public function getRegisters($month, $idUser){
+        $array = [];
+        $registers = Registers::select()
+            ->where('idUser', $idUser)
+            ->where('month', $month)
+            ->get();
+
+        if($registers){
+            foreach($registers as $register){
+                $register = $this->generateRegister($register['id'], $register['idUser'], $register['month'], $register['date']);
+                $register->date = date('d/m/Y H:i:s', strtotime($register->date));
+
+                $array[] = $register;
+            }
+        }
+
+        return $array;
+    }
+
     public function index() {
         $_SESSION['title'] = 'Captura de Ponto';
         
@@ -59,7 +102,6 @@ class RegisterController extends Controller {
     }
 
     public function addRegister($idUser){
-        $this->notLogged();
         $date = date('m', strtotime($this->date));
         $registerMonth = $this->findRegisterMonth($idUser, $date);
 
@@ -74,6 +116,7 @@ class RegisterController extends Controller {
 
         Registers::insert([
             'idUser' => $idUser,
+            'month' => $date,
             'date' => $this->date
         ])->execute();
     }
@@ -95,14 +138,7 @@ class RegisterController extends Controller {
         $this->redirect('/ponto');
     }
 
-    public function toDoRegisters($id){
-        return RegistersMonths::select()
-        ->where('idUser', $id)
-        ->where('done', 0)
-        ->get();
-    }
-
-    public function selectRegiser($month){
+    public function selectRegisterMonth($month){
         return RegistersMonths::select()
         ->where('month', $month)
         ->where('done', 0)
@@ -114,7 +150,7 @@ class RegisterController extends Controller {
         $_SESSION['title'] = 'Verificar Ponto';
         $date = date('m', strtotime($this->date));
 
-        $registers = $this->selectRegiser($date);
+        $registers = $this->selectRegisterMonth($date);
 
         if($registers){
             $arrayRegisters = [];
@@ -144,27 +180,18 @@ class RegisterController extends Controller {
 
     public function registerDetail($id){
         $this->notLogged();
+        $registerMonth = $this->findRegisterMonthById($id);
         $users = new UsersController();
-        $user = $users->findById($id);
+        $user = $users->findById($registerMonth->idUser);
 
         $_SESSION['title'] = 'Ponto - '.$user->name;
 
-        $registers = $this->toDoRegisters($user->id);
-
-        if($registers){
-            $arrayRegisters = [];
-            foreach($registers as $register){
-                $register = $this->generateRegisterMonth($register['id'], $register['idUser'], $register['month'],
-                    $register['date'], $register['done']);
-
-                $arrayRegisters[] = $register;
-            }
-        }
+        $registers = $this->getRegisters($registerMonth->month, $user->id);
 
         $data = [
             'loggedUser' => $this->loggedUser,
             'user' => $user,
-            'registers' => $arrayRegisters
+            'registers' => $registers
         ];
 
         $this->render('ponto/registerDetail', $data);

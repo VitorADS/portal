@@ -243,3 +243,22 @@ header{
     text-decoration: none;
     color: inherit;
 }
+
+.editarRegistroTable{
+    margin-left: 150px;
+    text-align: center;
+    width: 80%;
+}
+
+.editarRegistroTable a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.editarRegistroTable table tr:hover{
+    background-color: #c0c0c0;
+}
+
+.editarRegistroTable a:hover{
+    color: white;
+}
