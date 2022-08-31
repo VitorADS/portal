@@ -1,7 +1,9 @@
 <?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 <div class="divPonto">
     <div class="pontoTable">
-        <h1 class="pontoTitle">Verificar Ponto</h1><hr>
+        <h1 class="pontoTitle">Verificar Ponto</h1><br/>
+        <button onclick="verificaRegistros()" class="btn btn-primary botaoVerifica"><a href="<?=$base;?>/verificaRegistros">Verificar</a></button>
+        <br/><hr/>
         <?php if($_SESSION['flash'] != 1 and $_SESSION['flash'] != ''): ?>
             <div class="alert alert-warning alertPonto" role="alert">
                 <p><?=$_SESSION['flash'];?></p>

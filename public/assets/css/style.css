@@ -286,4 +286,18 @@ header{
 
 .pontoTitle{
     text-align: left;
+    float: left;
+}
+
+.botaoVerifica{
+    float: right;
+}
+
+.divPonto a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.divPonto a:hover{
+    color: white;
 }

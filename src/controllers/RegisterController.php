@@ -30,6 +30,13 @@ class RegisterController extends Controller {
         return $d && $d->format($format) == $date;
     }
 
+    public function generateDatabaseDate($date){
+        list($date, $time) = explode(" ", $date);
+        $date = implode('-', array_reverse(explode('/', $date))).' '.$time;
+
+        return $date;
+    }
+
     public function generateRegisterMonth($id, $idUser, $month, $date, $done){
         $registerMonth = new RegistersMonths();
         $registerMonth->id = $id;
@@ -41,42 +48,85 @@ class RegisterController extends Controller {
         return $registerMonth;
     }
 
-    public function generateRegister($id, $idUser, $month, $date){
+    public function generateRegister($id, $idUser, $month, $date, $invalid){
         $register = new Registers();
         $register->id = $id;
         $register->idUser = $idUser;
         $register->month = $month;
         $register->date = $date;
+        $register->invalid = $invalid;
 
         return $register;
     }
 
     public function verifyRegisters(){
+        $this->notLogged();
         $day = date('d', strtotime($this->date));
         $month = date('m', strtotime($this->date));
         $year = date('Y', strtotime($this->date));
 
         if(($day == 1 OR $day == 01) AND $month != 1 AND $month != 01){
-            $registersMonth = $this->getRegistersMonth($month);
+            $registersMonth = $this->getRegistersMonth($month - 1);
+            $date = $year. '-'. $month - 1 . '-'. $day. ' '. '00:00:00';
 
-            if($registersMonth != null){
-                
-            }
-        }else{
+        }else if(($day == 1 OR $day == 01) AND ($month == 1 OR $month == 01)){
+            $registersMonth = $this->getRegistersMonth(12);
+            $date = $year - 1 . '-'. 12 . '-'. $day. ' '. '00:00:00'; 
+        
+        }else if($day > 1){
+            $registersMonth = $this->getRegistersMonth($month);
+            $date = $year. '-'. $month. '-'. $day. ' '. '00:00:00';
 
         }
+        if($registersMonth != null){
+            foreach($registersMonth as $registerMonth){
+                $registers = $this->getRegisters($registerMonth->month, $registerMonth->idUser);
+                $contaRegistro = 0;
+                $registerDay = 0;
+                $diaInvalido = 0;
+
+                foreach($registers as $register){
+                    $register->date = $this->generateDatabaseDate($register->date);
+                    $contaRegistro++;
+                    
+                    $data = new DateTime($register->date);
+                    $dataDia = $data->format('d');
+
+                    if($contaRegistro == 0){
+                        $diaInvalido = $register->date;
+                    }
+
+                    if($contaRegistro < 4 AND $registerDay != $dataDia){
+                        $this->addInvalidRegister($register->idUser, $registerMonth->month, $diaInvalido);
+                        $contaRegistro = 1;
+
+                    }else if($contaRegistro == 4 AND $registerDay != $dataDia){
+                        $this->addInvalidRegister($register->idUser, $registerMonth->month, $diaInvalido);
+                        $contaRegistro = 1;
+
+                    }else if($contaRegistro >= 4 AND $registerDay == $dataDia){
+                        $contaRegistro = 0;
+                    }
+
+                    $registerDay = date('d', strtotime($register->date));
+                }
+            }
+        }
+        $_SESSION['flash'] = 'Verificado!';
+        $this->redirect('/academico/verificarPonto');
     }
 
     public function getRegistersMonth($month){
         $registersMonth = RegistersMonths::select()
             ->where('month', $month)
+            ->where('done', 0)
             ->get();
 
         $array = [];
         if(count($registersMonth) > 0){
             foreach($registersMonth as $registerMonth){
-                $registerMonth = $this->generateRegisterMonth($registerMonth[0]['id'], $registerMonth[0]['idUser'],
-                $registerMonth[0]['month'], $registerMonth[0]['date'], $registerMonth[0]['done']);
+                $registerMonth = $this->generateRegisterMonth($registerMonth['id'], $registerMonth['idUser'],
+                $registerMonth['month'], $registerMonth['date'], $registerMonth['done']);
 
                 $array[] = $registerMonth;
             }
@@ -125,7 +175,8 @@ class RegisterController extends Controller {
 
         if($registers){
             foreach($registers as $register){
-                $register = $this->generateRegister($register['id'], $register['idUser'], $register['month'], $register['date']);
+                $register = $this->generateRegister($register['id'], $register['idUser'], $register['month'], $register['date'],
+                    $register['invalid']);
                 $register->date = date('d/m/Y H:i:s', strtotime($register->date));
 
                 $array[] = $register;
@@ -141,7 +192,8 @@ class RegisterController extends Controller {
             ->get();
 
         if($register){
-            $register = $this->generateRegister($register[0]['id'], $register[0]['idUser'], $register[0]['month'], $register[0]['date']);
+            $register = $this->generateRegister($register[0]['id'], $register[0]['idUser'], $register[0]['month'], $register[0]['date'],
+                $register[0]['invalid']);
             $register->date = date('d/m/Y H:i:s', strtotime($register->date));
 
             return $register;
@@ -154,6 +206,15 @@ class RegisterController extends Controller {
         $_SESSION['title'] = 'Captura de Ponto';
         
         $this->render('ponto/home');
+    }
+
+    public function addInvalidRegister($idUser, $month, $date){
+        Registers::insert([
+            'idUser' => $idUser,
+            'month' => $month,
+            'date' => $date,
+            'invalid' => 1
+        ])->execute();
     }
 
     public function addRegister($idUser){
@@ -172,7 +233,8 @@ class RegisterController extends Controller {
         Registers::insert([
             'idUser' => $idUser,
             'month' => $date,
-            'date' => $this->date
+            'date' => $this->date,
+            'invalid' => 0
         ])->execute();
     }
 
@@ -274,8 +336,7 @@ class RegisterController extends Controller {
         $date = filter_input(INPUT_POST, 'date');
         $register = filter_input(INPUT_POST, 'register');
 
-        list($date, $time) = explode(" ", $date);
-        $date = implode('-', array_reverse(explode('/', $date))).' '.$time;
+        $date = $this->generateDatabaseDate($date);
 
         if($this->validateDate($date)){
             Registers::update()

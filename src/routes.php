@@ -25,6 +25,7 @@ $router->get('/academico/portal/espelhoPonto', 'AcademicController@espelhoPonto'
 
 //Requests
 $router->get('/academico/user/{id}', 'UsersController@requestUser');
+$router->get('/verificaRegistros', 'RegisterController@verifyRegisters');
 
 //Ponto
 $router->get('/ponto', 'RegisterController@index');
