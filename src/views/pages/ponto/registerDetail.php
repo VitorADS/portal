@@ -1,6 +1,6 @@
 <?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 <div class="editarRegistroTable">
-    <h3>Ponto de <?=$user->name;?> (<?=$user->id;?>) - Mes: <?=$registers[0]->month;?></h3><hr/>
+    <h1 class="pontoTitle">Ponto de <?=$user->name;?> (<?=$user->id;?>) - Mes: <?=$registers[0]->month;?></h1><hr/>
 
     <table class="table table-bordered">
         <thead class="table-dark">

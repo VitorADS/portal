@@ -1,35 +1,35 @@
 <?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
 <div class="divPonto">
     <div class="pontoTable">
-    <h1>Verificar Ponto</h1><hr>
-    <?php if($_SESSION['flash'] != 1 and $_SESSION['flash'] != ''): ?>
-        <div class="alert alert-warning alertPonto" role="alert">
-            <p><?=$_SESSION['flash'];?></p>
-        </div>
-    <?php endif; ?>
-    <?php if($_SESSION['flash'] == 1): ?>
-        <div class="alert alert-success alertPonto" role="alert">
-            <p>Alterado com sucesso!</p>
-        </div>
-    <?php endif; ?>
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Codigo</th>
-                    <th>Nome</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($users as $user): ?>
+        <h1 class="pontoTitle">Verificar Ponto</h1><hr>
+        <?php if($_SESSION['flash'] != 1 and $_SESSION['flash'] != ''): ?>
+            <div class="alert alert-warning alertPonto" role="alert">
+                <p><?=$_SESSION['flash'];?></p>
+            </div>
+        <?php endif; ?>
+        <?php if($_SESSION['flash'] == 1): ?>
+            <div class="alert alert-success alertPonto" role="alert">
+                <p>Alterado com sucesso!</p>
+            </div>
+        <?php endif; ?>
+            <table class="table table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <td><?=$user->id;?></td>
-                        <td><?=$user->name;?></td>
-                        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<?=$user->id;?>">Ver</button></td>
+                        <th>Codigo</th>
+                        <th>Nome</th>
+                        <th>Ações</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach($users as $user): ?>
+                        <tr>
+                            <td><?=$user->id;?></td>
+                            <td><?=$user->name;?></td>
+                            <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<?=$user->id;?>">Ver</button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
     </div>
 </div>
 <div class="modalPonto">

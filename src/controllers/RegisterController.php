@@ -3,7 +3,6 @@ namespace src\controllers;
 
 use \core\Controller;
 use DateTime;
-use Exception;
 use src\models\Registers;
 use src\models\RegistersMonths;
 
@@ -50,6 +49,40 @@ class RegisterController extends Controller {
         $register->date = $date;
 
         return $register;
+    }
+
+    public function verifyRegisters(){
+        $day = date('d', strtotime($this->date));
+        $month = date('m', strtotime($this->date));
+        $year = date('Y', strtotime($this->date));
+
+        if(($day == 1 OR $day == 01) AND $month != 1 AND $month != 01){
+            $registersMonth = $this->getRegistersMonth($month);
+
+            if($registersMonth != null){
+                
+            }
+        }else{
+
+        }
+    }
+
+    public function getRegistersMonth($month){
+        $registersMonth = RegistersMonths::select()
+            ->where('month', $month)
+            ->get();
+
+        $array = [];
+        if(count($registersMonth) > 0){
+            foreach($registersMonth as $registerMonth){
+                $registerMonth = $this->generateRegisterMonth($registerMonth[0]['id'], $registerMonth[0]['idUser'],
+                $registerMonth[0]['month'], $registerMonth[0]['date'], $registerMonth[0]['done']);
+
+                $array[] = $registerMonth;
+            }
+        }
+
+        return $array;
     }
 
     public function findRegisterMonthById($id){
@@ -244,7 +277,7 @@ class RegisterController extends Controller {
         list($date, $time) = explode(" ", $date);
         $date = implode('-', array_reverse(explode('/', $date))).' '.$time;
 
-        if($this->validateDate($date, 'Y-m-d H:i:s')){
+        if($this->validateDate($date)){
             Registers::update()
             ->set('date', $date)
             ->where('id', $register)

@@ -248,6 +248,7 @@ header{
     margin-left: 150px;
     text-align: center;
     width: 80%;
+    margin-top: 30px;
 }
 
 .editarRegistroTable a{
@@ -281,4 +282,8 @@ header{
 .alertPonto{
     font-size: 20px;
     text-align: center;
+}
+
+.pontoTitle{
+    text-align: left;
 }
