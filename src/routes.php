@@ -32,3 +32,4 @@ $router->post('/ponto/registrarPonto', 'RegisterController@registraPonto');
 $router->get('/academico/verificarPonto', 'RegisterController@checkRegister');
 $router->get('/academico/verificarPonto/{id}', 'RegisterController@registerDetail');
 $router->get('/academico/editarPonto/{id}', 'RegisterController@editarPonto');
+$router->post('/academico/editarPontoAction', 'RegisterController@editarPontoAction');

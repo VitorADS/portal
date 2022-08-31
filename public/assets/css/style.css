@@ -262,3 +262,23 @@ header{
 .editarRegistroTable a:hover{
     color: white;
 }
+
+.editarPonto{
+    width: 700px;
+    padding: 50px;
+}
+
+.formEditarPonto{
+    padding: 30px;
+    margin-left: 100px;
+}
+
+.formEditarPonto input{
+    padding: 10px;
+    font-size:17px;
+}
+
+.alertPonto{
+    font-size: 20px;
+    text-align: center;
+}

@@ -2,6 +2,8 @@
 namespace src\controllers;
 
 use \core\Controller;
+use DateTime;
+use Exception;
 use src\models\Registers;
 use src\models\RegistersMonths;
 
@@ -22,6 +24,11 @@ class RegisterController extends Controller {
         if(!$this->loggedUser){
             $this->redirect('/');
         }
+    }
+
+    public function validateDate($date, $format = 'Y-m-d H:i:s'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 
     public function generateRegisterMonth($id, $idUser, $month, $date, $done){
@@ -227,5 +234,27 @@ class RegisterController extends Controller {
         ];
 
         $this->render('ponto/editarPonto', $data);
+    }
+
+    public function editarPontoAction(){
+        $this->notLogged();
+        $date = filter_input(INPUT_POST, 'date');
+        $register = filter_input(INPUT_POST, 'register');
+
+        list($date, $time) = explode(" ", $date);
+        $date = implode('-', array_reverse(explode('/', $date))).' '.$time;
+
+        if($this->validateDate($date, 'Y-m-d H:i:s')){
+            Registers::update()
+            ->set('date', $date)
+            ->where('id', $register)
+            ->execute();
+
+            $_SESSION['flash'] = 1;
+        }else{
+            $_SESSION['flash'] = 'Data/Hora informados incorretamente!';
+        }
+
+        $this->redirect('/academico/verificarPonto');
     }
 }

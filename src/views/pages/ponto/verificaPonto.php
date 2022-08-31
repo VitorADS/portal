@@ -2,6 +2,16 @@
 <div class="divPonto">
     <div class="pontoTable">
     <h1>Verificar Ponto</h1><hr>
+    <?php if($_SESSION['flash'] != 1 and $_SESSION['flash'] != ''): ?>
+        <div class="alert alert-warning alertPonto" role="alert">
+            <p><?=$_SESSION['flash'];?></p>
+        </div>
+    <?php endif; ?>
+    <?php if($_SESSION['flash'] == 1): ?>
+        <div class="alert alert-success alertPonto" role="alert">
+            <p>Alterado com sucesso!</p>
+        </div>
+    <?php endif; ?>
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
