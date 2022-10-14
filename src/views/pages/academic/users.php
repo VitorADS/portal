@@ -1,16 +1,16 @@
 <?php $render('header', ['loggedUser' => $loggedUser]); $render('menuHome');?>
-<div class="table">
+<div class="table-users-page">
     <table id="table">
         <thead>
-        <th>Codigo</th>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>CPF</th>
-        <th>Data de Nascimento</th>
-        <th>Sexo</th>
-        <th>Estudante</th>
-        <th>Funcionario</th>
-        <th>Professor</th>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Estudante</th>
+            <th>Funcionario</th>
+            <th>Professor</th>
         </thead>
         <tbody>
             <?php foreach($users as $user): ?>
